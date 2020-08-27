@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Modal from '@max/modal'
 
 function App() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   const openModal = () => {
     setVisible(true);
@@ -15,7 +15,7 @@ function App() {
   return (
     <div>
       <button type="button" onClick={openModal}>Open modal</button>
-      <Modal visible={visible} onClose={closeModal}>
+      <Modal title="Warning" visible={visible} onClose={closeModal}>
         Hello, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid doloremque eum illum magnam maiores neque pariatur quis quisquam quod quos, rerum sint, unde. Animi expedita fuga odio quae temporibus.
       </Modal>
     </div>
