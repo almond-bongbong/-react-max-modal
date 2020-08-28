@@ -4,6 +4,8 @@ import {
   ReactNode,
   useCallback,
   useEffect,
+  useLayoutEffect,
+  useRef,
   useState,
 } from 'react';
 import { mergeClassNames } from './libs/utils';
@@ -41,7 +43,21 @@ function Modal({
   contentClassName,
 }: // resetStyle = false,
 Props): ReactElement {
+  const modalBodyRef = useRef<HTMLDivElement>(null);
   const [localVisible, setLocalVisible] = useState(visible);
+  const [hasScroll, setHasScroll] = useState(false);
+
+  useLayoutEffect(() => {
+    if (visible && modalBodyRef.current) {
+      const windowHeight = window.innerHeight;
+      const height = modalBodyRef.current.clientHeight;
+      const margin = 50;
+
+      if (windowHeight - margin < height) {
+        setHasScroll(true);
+      }
+    }
+  }, [visible]);
 
   useEffect(() => {
     if (visible) {
@@ -73,8 +89,9 @@ Props): ReactElement {
 
   const modalClassNames = mergeClassNames(
     styles.modal,
+    modalClassName,
     visible && localVisible && styles.active,
-    modalClassName
+    hasScroll && styles.overflow_body
   );
   const maskClassNames = mergeClassNames(styles.mask, maskClassName);
   const bodyClassNames = mergeClassNames(styles.modal_body, bodyClassName);
@@ -89,7 +106,7 @@ Props): ReactElement {
             onClick={handleClickMask}
             style={{ width }}
           />
-          <div className={bodyClassNames}>
+          <div className={bodyClassNames} ref={modalBodyRef}>
             {title && <Title>{title}</Title>}
             <div className={contentClassNames}>{children}</div>
             <CloseButton onClick={onClose} />
