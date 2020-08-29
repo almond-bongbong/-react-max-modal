@@ -1,28 +1,33 @@
-.modal {
+.opened_modal {
+  overflow: hidden;
+}
+
+.mask {
   opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s ease-out;
+}
+
+.mask.active {
+  opacity: 1;
+}
+
+.modal {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 10000;
-  transition: opacity 0.2s ease-out;
-}
-
-.modal.active {
-  opacity: 1;
-}
-
-.mask {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .modal_body {
+  opacity: 0;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -32,6 +37,11 @@
   background-color: #fff;
   box-shadow: 0 2px 6px 1px rgba(100, 100, 100, 0.2);
   transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease-out;
+}
+
+.active .modal_body {
+  opacity: 1;
 }
 
 .overflow_body {
