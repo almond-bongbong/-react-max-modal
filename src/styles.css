@@ -1,9 +1,6 @@
-.opened_modal {
-  overflow: hidden;
-}
-
 .mask {
   opacity: 0;
+  overflow: hidden;
   position: absolute;
   top: 0;
   right: 0;
@@ -96,7 +93,7 @@
   background-color: #888;
   border-radius: 3px;
   transform-origin: 50% 50%;
-  transition: width .2s, background-color 0.2s;
+  transition: width 0.2s, background-color 0.2s;
 }
 
 .close_button:hover:before,

@@ -6,7 +6,7 @@ function App() {
   const [visible2, setVisible2] = useState(false);
 
   return (
-    <div>
+    <div style={{ width: 600, margin: '0 auto' }}>
       <button type="button" onClick={() => setVisible1(true)}>Open modal</button>
       <button type="button" onClick={() => setVisible2(true)}>Open long content modal</button>
 

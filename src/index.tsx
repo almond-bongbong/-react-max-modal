@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   ReactElement,
   ReactNode,
+  SyntheticEvent,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -9,6 +10,7 @@ import {
   useState,
 } from 'react';
 import { mergeClassNames } from './libs/utils';
+import { isBrowser } from './libs/validation';
 import styles from './styles.css';
 import Portal from './components/Portal';
 import CloseButton from './components/CloseButton';
@@ -41,11 +43,25 @@ function Modal({
   maskClassName,
   bodyClassName,
   contentClassName,
-}: // resetStyle = false,
-Props): ReactElement {
+}: Props): ReactElement {
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const [localVisible, setLocalVisible] = useState(visible);
   const [hasScroll, setHasScroll] = useState(false);
+
+  useLayoutEffect(() => {
+    if (visible && !localVisible) {
+      const scrollWidth =
+        isBrowser() &&
+        visible &&
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.overflow = 'hidden';
+      document.body.style.marginRight = `${scrollWidth || 0}px`;
+    }
+    if (!visible && !localVisible) {
+      document.body.style.overflow = '';
+      document.body.style.marginRight = '';
+    }
+  }, [visible, localVisible]);
 
   useLayoutEffect(() => {
     if (visible && modalBodyRef.current) {
@@ -57,16 +73,7 @@ Props): ReactElement {
         setHasScroll(true);
       }
     }
-  }, [visible]);
-
-  useLayoutEffect(() => {
-    if (visible && hasScroll) {
-      document.body.classList.add(styles.opened_modal);
-    }
-    if (!localVisible) {
-      document.body.classList.remove(styles.opened_modal);
-    }
-  }, [visible, localVisible, hasScroll]);
+  }, [visible, modalBodyRef]);
 
   useEffect(() => {
     if (visible) {
@@ -96,6 +103,13 @@ Props): ReactElement {
     if (maskClosable) onClose?.();
   }, [maskClosable, onClose]);
 
+  const handleClickBody = useCallback(
+    (e: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
+      e.stopPropagation();
+    },
+    []
+  );
+
   const modalClassNames = mergeClassNames(
     styles.modal,
     modalClassName,
@@ -105,22 +119,24 @@ Props): ReactElement {
   const maskClassNames = mergeClassNames(
     styles.mask,
     maskClassName,
-    visible && styles.active
+    visible && localVisible && styles.active
   );
   const bodyClassNames = mergeClassNames(styles.modal_body, bodyClassName);
   const contentClassNames = mergeClassNames(styles.content, contentClassName);
+
+  console.log('render : ', visible);
 
   return (
     <Portal>
       {(visible || (!visible && localVisible)) && (
         <>
-          <div
-            className={maskClassNames}
-            onClick={handleClickMask}
-            style={{ width }}
-          />
-          <div className={modalClassNames}>
-            <div className={bodyClassNames} ref={modalBodyRef}>
+          <div className={maskClassNames} style={{ width }} />
+          <div className={modalClassNames} onClick={handleClickMask}>
+            <div
+              className={bodyClassNames}
+              ref={modalBodyRef}
+              onClick={handleClickBody}
+            >
               {title && <Title>{title}</Title>}
               <div className={contentClassNames}>{children}</div>
               <CloseButton onClick={onClose} />

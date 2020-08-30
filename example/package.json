@@ -5,11 +5,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@max/modal": "file:..",
     "prop-types": "^15.6.2",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "^1.1.4",
-    "@max/modal": "file:.."
+    "react-syntax-highlighter": "^13.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
