@@ -8,19 +8,13 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fefefe;
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
-  "Helvetica Neue", Arial, sans-serif;
+  font-family: 'Raleway', sans-serif;
   color: #444;
   line-height: 1.5;
 }
 
-body code {
-  font-family: "Source Code Pro", monospace;
-  font-size: 14px;
-}
-
 header {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
@@ -29,7 +23,7 @@ header {
   background-color: #fff;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
   font-size: 20px;
-  color: #5d657a;
+  color: #fa4615;
 }
 
 header .header-content {
@@ -42,16 +36,18 @@ header .header-content {
 
 header h1 {
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .links {
   position: absolute;
   top: 3px;
   right: 30px;
+  font-size: 0;
 }
 
 .links a {
+  display: inline-block;
   color: #5d657a;
   font-size: 15px;
   font-weight: 300;
@@ -60,6 +56,12 @@ header h1 {
 
 .links a + a {
   margin-left: 20px;
+}
+
+.links a img {
+  display: block;
+  width: 28px;
+  height: 28px;
 }
 
 footer {
@@ -92,14 +94,14 @@ h2 {
   border-bottom: 1px solid #eee;
   color: #555;
   font-size: 40px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 h3 {
   margin-bottom: 20px;
   color: #888;
   font-size: 28px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 p {
@@ -116,17 +118,13 @@ p {
   outline: 0;
   border: 0;
   border-radius: 4px;
-  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
-  background-color: #5d657a;
+  box-shadow: 1px 2px 3px rgba(204, 120, 50, 0.2);
+  background-color: #fa4615;
   color: #fff;
   font-size: 16px;
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
-}
-
-.example-button:active {
-  background-color: #383d4a;
 }
 
 .example-button + .example-button {

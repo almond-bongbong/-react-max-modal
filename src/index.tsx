@@ -10,7 +10,6 @@ import {
   useState,
 } from 'react';
 import { mergeClassNames } from './libs/utils';
-import { isBrowser } from './libs/validation';
 import styles from './styles.css';
 import Portal from './components/Portal';
 import CloseButton from './components/CloseButton';
@@ -22,9 +21,11 @@ interface Props {
   onClose: () => void;
   title?: ReactNode;
   width?: number | string;
-  maskClosable?: boolean;
-  escKeyClosable?: boolean;
-  resetStyle?: boolean;
+  showsCloseButton?: boolean;
+  isMaskClosable?: boolean;
+  isEscKeyClosable?: boolean;
+  isCenteredMode?: boolean;
+  isExpandedMode?: boolean;
   modalClassName?: string;
   maskClassName?: string;
   bodyClassName?: string;
@@ -36,9 +37,12 @@ function Modal({
   children,
   onClose,
   title,
-  width,
-  maskClosable = true,
-  escKeyClosable = true,
+  width = 520,
+  showsCloseButton = true,
+  isMaskClosable = true,
+  isEscKeyClosable = true,
+  isCenteredMode = false,
+  isExpandedMode = false,
   modalClassName,
   maskClassName,
   bodyClassName,
@@ -47,21 +51,6 @@ function Modal({
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const [localVisible, setLocalVisible] = useState(visible);
   const [hasScroll, setHasScroll] = useState(false);
-
-  useLayoutEffect(() => {
-    if (visible && !localVisible) {
-      const scrollWidth =
-        isBrowser() &&
-        visible &&
-        window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = 'hidden';
-      document.body.style.marginRight = `${scrollWidth || 0}px`;
-    }
-    if (!visible && !localVisible) {
-      document.body.style.overflow = '';
-      document.body.style.marginRight = '';
-    }
-  }, [visible, localVisible]);
 
   useLayoutEffect(() => {
     if (visible && modalBodyRef.current) {
@@ -74,6 +63,21 @@ function Modal({
       }
     }
   }, [visible, modalBodyRef]);
+
+  useLayoutEffect(() => {
+    if (visible && !localVisible) {
+      const scrollWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.position = 'relative';
+      document.body.style.overflow = 'hidden';
+      document.body.style.width = `calc(100% - ${scrollWidth || 0}px)`;
+    }
+    if (!visible && !localVisible) {
+      document.body.style.position = '';
+      document.body.style.overflow = '';
+      document.body.style.width = '';
+    }
+  }, [visible, localVisible]);
 
   useEffect(() => {
     if (visible) {
@@ -89,57 +93,63 @@ function Modal({
         onClose?.();
       }
     },
-    [onClose]
+    [onClose],
   );
 
   useEffect(() => {
-    if (escKeyClosable) document.addEventListener('keydown', keydownHandler);
+    if (isEscKeyClosable) document.addEventListener('keydown', keydownHandler);
     return () => {
       document.removeEventListener('keydown', keydownHandler);
     };
-  }, [escKeyClosable, keydownHandler]);
+  }, [isEscKeyClosable, keydownHandler]);
 
   const handleClickMask = useCallback(() => {
-    if (maskClosable) onClose?.();
-  }, [maskClosable, onClose]);
+    if (isMaskClosable) onClose?.();
+  }, [isMaskClosable, onClose]);
 
   const handleClickBody = useCallback(
     (e: SyntheticEvent<HTMLDivElement, MouseEvent>) => {
       e.stopPropagation();
     },
-    []
+    [],
   );
 
+  const maskClassNames = mergeClassNames(
+    styles.mask,
+    maskClassName,
+    visible && localVisible && styles.active,
+  );
   const modalClassNames = mergeClassNames(
     styles.modal,
     modalClassName,
     visible && localVisible && styles.active,
-    hasScroll && styles.overflow_body
+    hasScroll && styles.overflow_body,
+    isCenteredMode && styles.center_mode,
   );
-  const maskClassNames = mergeClassNames(
-    styles.mask,
-    maskClassName,
-    visible && localVisible && styles.active
+  const bodyClassNames = mergeClassNames(
+    styles.modal_body,
+    bodyClassName,
+    isExpandedMode && styles.expand_mode,
   );
-  const bodyClassNames = mergeClassNames(styles.modal_body, bodyClassName);
   const contentClassNames = mergeClassNames(styles.content, contentClassName);
-
-  console.log('render : ', visible);
 
   return (
     <Portal>
       {(visible || (!visible && localVisible)) && (
         <>
-          <div className={maskClassNames} style={{ width }} />
+          <div className={maskClassNames} />
           <div className={modalClassNames} onClick={handleClickMask}>
             <div
               className={bodyClassNames}
               ref={modalBodyRef}
               onClick={handleClickBody}
+              style={{ width }}
             >
-              {title && <Title>{title}</Title>}
-              <div className={contentClassNames}>{children}</div>
-              <CloseButton onClick={onClose} />
+              <div className={contentClassNames}>
+                {title && <Title>{title}</Title>}
+                {children}
+              </div>
+              {showsCloseButton && <CloseButton onClick={onClose} />}
             </div>
           </div>
         </>
