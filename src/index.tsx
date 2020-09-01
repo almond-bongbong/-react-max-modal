@@ -48,9 +48,22 @@ function Modal({
   bodyClassName,
   contentClassName,
 }: Props): ReactElement {
+  const modalIdRef = useRef<number>(Date.now());
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const [localVisible, setLocalVisible] = useState(visible);
   const [hasScroll, setHasScroll] = useState(false);
+
+  useEffect(() => {
+    if (visible) {
+      window._activeModalIds = (window._activeModalIds || []).concat(
+        modalIdRef.current,
+      );
+    } else {
+      window._activeModalIds = window._activeModalIds?.filter(
+        (id) => id !== modalIdRef.current,
+      );
+    }
+  }, [visible]);
 
   useLayoutEffect(() => {
     if (visible && modalBodyRef.current) {
@@ -72,7 +85,7 @@ function Modal({
       document.body.style.overflow = 'hidden';
       document.body.style.width = `calc(100% - ${scrollWidth || 0}px)`;
     }
-    if (!visible && !localVisible) {
+    if (!visible && !localVisible && window._activeModalIds?.length === 0) {
       document.body.style.position = '';
       document.body.style.overflow = '';
       document.body.style.width = '';
@@ -89,7 +102,12 @@ function Modal({
 
   const keydownHandler = useCallback(
     (e) => {
-      if (e.code === 'Escape') {
+      if (
+        window._activeModalIds &&
+        window._activeModalIds[window._activeModalIds.length - 1] ===
+          modalIdRef.current &&
+        e.code === 'Escape'
+      ) {
         onClose?.();
       }
     },
@@ -97,11 +115,13 @@ function Modal({
   );
 
   useEffect(() => {
-    if (isEscKeyClosable) document.addEventListener('keydown', keydownHandler);
+    if (isEscKeyClosable && visible) {
+      document.addEventListener('keydown', keydownHandler);
+    }
     return () => {
       document.removeEventListener('keydown', keydownHandler);
     };
-  }, [isEscKeyClosable, keydownHandler]);
+  }, [isEscKeyClosable, visible, keydownHandler]);
 
   const handleClickMask = useCallback(() => {
     if (isMaskClosable) onClose?.();

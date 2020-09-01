@@ -7,7 +7,7 @@
   bottom: 0;
   left: 0;
   z-index: 10000;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.3);
   transition: opacity 0.2s ease-out;
 }
 
@@ -21,7 +21,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 10100;
+  z-index: 10000;
   overflow-y: scroll;
 }
 

@@ -9,6 +9,8 @@ function App() {
   const [expandModal, setExpandModal] = useState(false);
   const [expandTitleModal, setExpandTitleModal] = useState(false);
 
+  const [examNestedModal, setExamNestedModal] = useState(false);
+  const [examNestedChildModal, setExamNestedChildModal] = useState(false);
   const [examProfileModal, setExamProfileModal] = useState(false);
 
   return (
@@ -240,8 +242,71 @@ function App() {
           </CommonHighlighter>
         </div>
 
-        {/** Profile modal **/}
         <h2>Example</h2>
+        {/** Nested modal **/}
+        <div className="example-area">
+          <h3>Nested modal</h3>
+          <div className="playground">
+            <button
+              type="button"
+              className="example-button"
+              onClick={() => setExamNestedModal(true)}
+            >
+              open modal
+            </button>
+            <Modal
+              title="Leo Tolstoy"
+              visible={examNestedModal}
+              onClose={() => setExamNestedModal(false)}
+            >
+              <img
+                style={{ float: 'right', width: 200 }}
+                src="https://img.etimg.com/thumb/msid-63173564,width-650,imgsize-74419,,resizemode-4,quality-100/.jpg"
+                onClick={() => setExamNestedChildModal(true)}
+                alt=""
+              />
+              “if they hadn’t both been pretending, but had had what is called a
+              heart-to-heart talk, that is, simply told each other just what
+              they were thinking and feeling, then they would just have looked
+              into each other’s eyes, and Constantine would only have said:
+              ‘You’re dying, dying, dying!’ – while Nicholas would simply have
+              replied: ‘I know I’m dying, but I’m afraid, afraid, afraid!’
+              That’s all they would have said if they’d been talking straight
+              from the heart. But it was impossible to live that way, so Levin
+              tried to do what he’d been trying to do all his life without being
+              able to, what a great many people could do so well, as he
+              observed, and without which life was impossible: he tried to say
+              something different from what he thought, and he always felt it
+              came out false, that his brother caught him out and was irritated
+              by it.”
+              <Modal
+                visible={examNestedChildModal}
+                onClose={() => setExamNestedChildModal(false)}
+                width={600}
+                isCenteredMode
+                isExpandedMode
+              >
+                <img
+                  style={{ display: 'block', width: '100%' }}
+                  src="https://img.etimg.com/thumb/msid-63173564,width-650,imgsize-74419,,resizemode-4,quality-100/.jpg"
+                  alt=""
+                />
+              </Modal>
+            </Modal>
+          </div>
+          <CommonHighlighter>
+            {`<Modal
+  title="The Old Man and the Sea"
+  visible={visible}
+  onClose={() => setVisible(false)}
+  isCenteredMode
+>
+  contents...
+</Modal>`}
+          </CommonHighlighter>
+        </div>
+
+        {/** Profile modal **/}
         <div className="example-area">
           <h3>Profile modal</h3>
           <div className="playground">

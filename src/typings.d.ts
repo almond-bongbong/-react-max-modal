@@ -15,3 +15,7 @@ declare module '*.svg' {
   export default svgUrl;
   export { svgComponent as ReactComponent }
 }
+
+declare interface Window {
+  _activeModalIds?: number[];
+}
