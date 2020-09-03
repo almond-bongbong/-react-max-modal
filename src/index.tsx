@@ -12,8 +12,9 @@ import {
 import { mergeClassNames } from './libs/utils';
 import styles from './styles.css';
 import Portal from './components/Portal';
-import CloseButton from './components/CloseButton';
 import Title from './components/Title';
+import CustomCloseButton from './components/CustomCloseButton';
+import CloseButton from './components/CloseButton';
 
 interface Props {
   visible: boolean;
@@ -21,6 +22,7 @@ interface Props {
   onClose: () => void;
   title?: ReactNode;
   width?: number | string;
+  closeButton?: ReactNode;
   showsCloseButton?: boolean;
   isMaskClosable?: boolean;
   isEscKeyClosable?: boolean;
@@ -32,12 +34,20 @@ interface Props {
   contentClassName?: string;
 }
 
+const addGlobalModalId = (id: number) =>
+  (window._activeModalIds = (window._activeModalIds || []).concat(id));
+const removeGlobalModalId = (removeId: number) =>
+  (window._activeModalIds = window._activeModalIds?.filter(
+    (id) => id !== removeId,
+  ));
+
 function Modal({
   visible,
   children,
   onClose,
   title,
   width = 520,
+  closeButton,
   showsCloseButton = true,
   isMaskClosable = true,
   isEscKeyClosable = true,
@@ -53,16 +63,16 @@ function Modal({
   const [localVisible, setLocalVisible] = useState(visible);
   const [hasScroll, setHasScroll] = useState(false);
 
+  useEffect(
+    () => () => {
+      removeGlobalModalId(modalIdRef.current);
+    },
+    [],
+  );
+
   useEffect(() => {
-    if (visible) {
-      window._activeModalIds = (window._activeModalIds || []).concat(
-        modalIdRef.current,
-      );
-    } else {
-      window._activeModalIds = window._activeModalIds?.filter(
-        (id) => id !== modalIdRef.current,
-      );
-    }
+    if (visible) addGlobalModalId(modalIdRef.current);
+    else removeGlobalModalId(modalIdRef.current);
   }, [visible]);
 
   useLayoutEffect(() => {
@@ -152,6 +162,11 @@ function Modal({
     isExpandedMode && styles.expand_mode,
   );
   const contentClassNames = mergeClassNames(styles.content, contentClassName);
+  const closeButtonComponent = closeButton ? (
+    <CustomCloseButton onClick={onClose}>{closeButton}</CustomCloseButton>
+  ) : (
+    <CloseButton onClick={onClose} />
+  );
 
   return (
     <Portal>
@@ -169,7 +184,7 @@ function Modal({
                 {title && <Title>{title}</Title>}
                 {children}
               </div>
-              {showsCloseButton && <CloseButton onClick={onClose} />}
+              {showsCloseButton && closeButtonComponent}
             </div>
           </div>
         </>

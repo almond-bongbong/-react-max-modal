@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import CommonHighlighter from './CommonHighlighter';
 import Modal from '@max/modal';
+import customClose from './assets/close.svg';
 
 function App() {
   const [basicModal, setBasicModal] = useState(false);
@@ -8,6 +9,7 @@ function App() {
   const [centerLongModal, setCenterLongModal] = useState(false);
   const [expandModal, setExpandModal] = useState(false);
   const [expandTitleModal, setExpandTitleModal] = useState(false);
+  const [customButtonModal, setCustomButtonModal] = useState(false);
 
   const [examNestedModal, setExamNestedModal] = useState(false);
   const [examNestedChildModal, setExamNestedChildModal] = useState(false);
@@ -68,7 +70,7 @@ function App() {
   visible={visible}
   onClose={() => setVisible(false)}
 >
-  contents...
+  contents
 </Modal>`}
           </CommonHighlighter>
         </div>
@@ -94,7 +96,7 @@ function App() {
             >
               Hello, Lorem ipsum dolor sit amet, consectetur adipisicing elit.
             </Modal>
-            &nbsp;&nbsp;&nbsp;
+
             <button
               type="button"
               className="example-button"
@@ -179,7 +181,7 @@ function App() {
   onClose={() => setVisible(false)}
   isCenteredMode
 >
-  contents...
+  contents
 </Modal>`}
           </CommonHighlighter>
         </div>
@@ -205,7 +207,7 @@ function App() {
                 style={{ display: 'block', width: '100%' }}
               />
             </Modal>
-            &nbsp;&nbsp;&nbsp;
+
             <button
               type="button"
               className="example-button"
@@ -238,6 +240,41 @@ function App() {
     style={{ display: 'block', width: '100%' }}
     alt=""
   />
+</Modal>`}
+          </CommonHighlighter>
+        </div>
+
+        <div className="example-area">
+          <h3>Custom close button</h3>
+          <div className="playground">
+            <button
+              type="button"
+              className="example-button"
+              onClick={() => setCustomButtonModal(true)}
+            >
+              open modal
+            </button>
+            <Modal
+              visible={customButtonModal}
+              title="Fyodor Dostoevsky, Crime and Punishment"
+              onClose={() => setCustomButtonModal(false)}
+              closeButton={<img src={customClose} width={30} height={30} alt="close" />}
+            >
+              "Pain and suffering are always inevitable for a large intelligence
+              and a deep heart. The really great men must, I think, have great
+              sadness on earth."
+            </Modal>
+          </div>
+          <CommonHighlighter>
+            {`import customClose from './assets/close.svg';
+
+<Modal
+  visible={customButtonModal}
+  title="Fyodor Dostoevsky, Crime and Punishment"
+  onClose={() => setCustomButtonModal(false)}
+  closeButton={<img src={customClose} width={30} height={30} alt="close" />}
+>
+  contents
 </Modal>`}
           </CommonHighlighter>
         </div>
@@ -301,7 +338,7 @@ function App() {
   onClose={() => setVisible(false)}
   isCenteredMode
 >
-  contents...
+  contents
 </Modal>`}
           </CommonHighlighter>
         </div>
@@ -335,7 +372,7 @@ function App() {
   onClose={() => setVisible(false)}
   isCenteredMode
 >
-  contents...
+  contents
 </Modal>`}
           </CommonHighlighter>
         </div>
