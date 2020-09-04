@@ -2,7 +2,8 @@ import React, { Fragment, useState } from 'react';
 import CommonHighlighter from './CommonHighlighter';
 import Modal, { useModal } from '@max/modal';
 import customClose from './assets/close.svg';
-import markProfile from './assets/mark.jpg';
+import markPhoto from './assets/mark.jpg';
+import tolstoyPhoto from './assets/tolstoy.jpg';
 
 function App() {
   const [basicModal, setBasicModal] = useState(false);
@@ -299,7 +300,6 @@ export default function App() {
         </div>
 
         <h2>Example</h2>
-        {/** Nested modal **/}
         <div className="example-area">
           <h3>Nested modal</h3>
           <div className="playground">
@@ -311,32 +311,21 @@ export default function App() {
               open modal
             </button>
             <Modal
-              title="Leo Tolstoy"
+              title="Family Happiness"
               visible={examNestedModal}
               onClose={() => setExamNestedModal(false)}
             >
-              <img
-                style={{ float: 'right', width: 200 }}
-                src="https://img.etimg.com/thumb/msid-63173564,width-650,imgsize-74419,,resizemode-4,quality-100/.jpg"
-                onClick={() => setExamNestedChildModal(true)}
-                alt=""
-              />
-              “if they hadn’t both been pretending, but had had what is called a
-              heart-to-heart talk, that is, simply told each other just what
-              they were thinking and feeling, then they would just have looked
-              into each other’s eyes, and Constantine would only have said:
-              ‘You’re dying, dying, dying!’ – while Nicholas would simply have
-              replied: ‘I know I’m dying, but I’m afraid, afraid, afraid!’
-              That’s all they would have said if they’d been talking straight
-              from the heart. But it was impossible to live that way, so Levin
-              tried to do what he’d been trying to do all his life without being
-              able to, what a great many people could do so well, as he
-              observed, and without which life was impossible: he tried to say
-              something different from what he thought, and he always felt it
-              came out false, that his brother caught him out and was irritated
-              by it.”
+              “A quiet secluded life in the country, with the possibility of
+              being useful to people to whom it is easy to do good, and who are
+              not accustomed to have it done to them; then work which one hopes
+              may be of some use; then rest, nature, books, music, love for
+              one's neighbor — such is my idea of happiness.” -{' '}
+              <a href="#;" onClick={() => setExamNestedChildModal(true)}>
+                Leo Tolstoy
+              </a>
               <Modal
                 visible={examNestedChildModal}
+                title="Leo Tolstoy"
                 onClose={() => setExamNestedChildModal(false)}
                 width={600}
                 isCenteredMode
@@ -344,21 +333,56 @@ export default function App() {
               >
                 <img
                   style={{ display: 'block', width: '100%' }}
-                  src="https://img.etimg.com/thumb/msid-63173564,width-650,imgsize-74419,,resizemode-4,quality-100/.jpg"
-                  alt=""
+                  src={tolstoyPhoto}
+                  alt="Leo Tolstoy"
                 />
               </Modal>
             </Modal>
           </div>
           <CommonHighlighter>
-            {`<Modal
-  title="The Old Man and the Sea"
-  visible={visible}
-  onClose={() => setVisible(false)}
-  isCenteredMode
->
-  contents
-</Modal>`}
+            {`import React, { useState } from 'react'
+import Modal from '@max/modal'
+
+export default function App() {
+  const [visibleParent, setVisibleParent] = useState(false);
+  const [visibleChild, setVisibleChild] = useState(false);
+
+  return (
+    <div>
+      <button
+        type="button"
+        className="example-button"
+        onClick={() => setVisibleParent(true)}
+      >
+        open modal
+      </button>
+
+      <Modal
+        title="Family Happiness"
+        visible={visibleParent}
+        onClose={() => setVisibleParent(false)}
+      >
+        “A quiet secluded life in the country, ...“
+        - <a href="#;" onClick={() => setVisibleChild(true)}>Leo Tolstoy</a>
+
+        <Modal
+          visible={visibleChild}
+          title="Leo Tolstoy"
+          onClose={() => setVisibleChild(false)}
+          width={600}
+          isCenteredMode
+          isExpandedMode
+        >
+          <img
+            style={{ display: 'block', width: '100%' }}
+            src={tolstoyPhoto}
+            alt="Leo Tolstoy"
+          />
+        </Modal>
+      </Modal>
+    </div>
+  );
+}`}
           </CommonHighlighter>
         </div>
 
@@ -388,7 +412,7 @@ export default function App() {
                 }}
               >
                 <img
-                  src={markProfile}
+                  src={markPhoto}
                   alt="mark"
                   style={{
                     display: 'block',
@@ -402,14 +426,14 @@ export default function App() {
                 />
               </div>
               <p style={{ marginTop: 30, padding: 50 }}>
-                <b>Mark Elliot Zuckerberg</b> (born May 14, 1984) is an
-                American media magnate, internet entrepreneur, and
-                philanthropist. He is known for co-founding Facebook, Inc. and
-                serves as its chairman, chief executive officer, and controlling
-                shareholder. He also is a co-founder of the solar sail
-                spacecraft development project Breakthrough Starshot and serves
-                as one of its board members.
-                <br /><br />
+                <b>Mark Elliot Zuckerberg</b> (born May 14, 1984) is an American
+                media magnate, internet entrepreneur, and philanthropist. He is
+                known for co-founding Facebook, Inc. and serves as its chairman,
+                chief executive officer, and controlling shareholder. He also is
+                a co-founder of the solar sail spacecraft development project
+                Breakthrough Starshot and serves as one of its board members.
+                <br />
+                <br />
                 Born in White Plains, New York, Zuckerberg attended Harvard
                 University, where he launched the Facebook social networking
                 service from his dormitory room on February 4, 2004, with
@@ -442,7 +466,7 @@ export default function App() {
     }}
   >
     <img
-      src={markProfile}
+      src={markPhoto}
       alt="mark"
       style={{
         display: 'block',
