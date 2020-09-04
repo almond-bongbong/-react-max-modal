@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  CSSProperties,
   ReactElement,
   ReactNode,
   SyntheticEvent,
@@ -22,6 +23,9 @@ interface Props {
   onClose: () => void;
   title?: ReactNode;
   width?: number | string;
+  zIndex?: number;
+  mask?: boolean;
+  maskStyle?: CSSProperties;
   closeButton?: ReactNode;
   showsCloseButton?: boolean;
   isMaskClosable?: boolean;
@@ -47,6 +51,9 @@ function Modal({
   onClose,
   title,
   width = 520,
+  zIndex,
+  mask = true,
+  maskStyle,
   closeButton,
   showsCloseButton = true,
   isMaskClosable = true,
@@ -172,8 +179,14 @@ function Modal({
     <Portal>
       {(visible || (!visible && localVisible)) && (
         <>
-          <div className={maskClassNames} />
-          <div className={modalClassNames} onClick={handleClickMask}>
+          {mask && (
+            <div className={maskClassNames} style={{ ...maskStyle, zIndex }} />
+          )}
+          <div
+            className={modalClassNames}
+            onClick={handleClickMask}
+            style={{ zIndex }}
+          >
             <div
               className={bodyClassNames}
               ref={modalBodyRef}
@@ -194,3 +207,11 @@ function Modal({
 }
 
 export default Modal;
+
+export const useModal = (initialVisible = false) => {
+  const [visible, setVisible] = useState(initialVisible);
+  const openModal = useCallback((): void => setVisible(true), []);
+  const closeModal = useCallback((): void => setVisible(false), []);
+
+  return [visible, openModal, closeModal] as const;
+}

@@ -1,6 +1,6 @@
 # @max/modal
 
-> Basic react modal popup
+> 🔥 React modal dialogs.
 
 [![NPM](https://img.shields.io/npm/v/@max/modal.svg)](https://www.npmjs.com/package/@max/modal) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -9,20 +9,37 @@
 ```bash
 npm install --save @max/modal
 ```
+or
+```bash
+yarn add @max/modal
+```
+
+> 🎯 For support for react <16.8
 
 ## Usage
 
 ```tsx
-import * as React from 'react'
+import React, { useState } from 'react'
+import Modal from '@max/modal'
 
-import MyComponent from '@max/modal'
+export default function App() {
+  const [visible, setVisible] = useState(false);
 
-class Example extends React.Component {
-  render () {
-    return (
-      <MyComponent />
-    )
-  }
+  return (
+    <>
+      <button type="button" onClick={() => setVisible(true)}>
+        open modal
+      </button>
+
+      <Modal
+        title="Modal"
+        visible={visible}
+        onClose={() => setVisible(false)}
+      >
+        contents
+      </Modal>
+    </>
+  );
 }
 ```
 

@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import CommonHighlighter from './CommonHighlighter';
-import Modal from '@max/modal';
+import Modal, { useModal } from '@max/modal';
 import customClose from './assets/close.svg';
+import markProfile from './assets/mark.jpg';
 
 function App() {
   const [basicModal, setBasicModal] = useState(false);
@@ -14,6 +15,8 @@ function App() {
   const [examNestedModal, setExamNestedModal] = useState(false);
   const [examNestedChildModal, setExamNestedChildModal] = useState(false);
   const [examProfileModal, setExamProfileModal] = useState(false);
+
+  const [hookVisible, openHookVisible, closeHookVisible] = useModal(false);
 
   return (
     <Fragment>
@@ -61,17 +64,31 @@ function App() {
           </div>
 
           <CommonHighlighter>
-            {`<button type="button" onClick={() => setVisible(true)}>
-  open modal
-</button>
+            {`import React, { useState } from 'react'
+import Modal from '@max/modal'
 
-<Modal
-  title="Modal"
-  visible={visible}
-  onClose={() => setVisible(false)}
->
-  contents
-</Modal>`}
+export default function App() {
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <div>
+      <button
+        type="button"
+        onClick={() => setVisible(true)}
+      >
+        open modal
+      </button>
+
+      <Modal
+        title="Modal"
+        visible={visible}
+        onClose={() => setVisible(false)}
+      >
+        contents
+      </Modal>
+    </div>
+  );
+}`}
           </CommonHighlighter>
         </div>
 
@@ -258,7 +275,9 @@ function App() {
               visible={customButtonModal}
               title="Fyodor Dostoevsky, Crime and Punishment"
               onClose={() => setCustomButtonModal(false)}
-              closeButton={<img src={customClose} width={30} height={30} alt="close" />}
+              closeButton={
+                <img src={customClose} width={30} height={30} alt="close" />
+              }
             >
               "Pain and suffering are always inevitable for a large intelligence
               and a deep heart. The really great men must, I think, have great
@@ -356,24 +375,138 @@ function App() {
             </button>
             <Modal
               visible={examProfileModal}
+              title="Mark Elliot Zuckerberg"
               onClose={() => setExamProfileModal(false)}
+              width={700}
+              isExpandedMode
             >
-              <img
-                src="https://placeimg.com/600/700/any"
-                alt=""
-                style={{ width: '100%' }}
-              />
+              <div
+                style={{
+                  position: 'relative',
+                  height: 180,
+                  background: '#555',
+                }}
+              >
+                <img
+                  src={markProfile}
+                  alt="mark"
+                  style={{
+                    display: 'block',
+                    position: 'absolute',
+                    bottom: '-50px',
+                    left: '50%',
+                    width: 150,
+                    marginLeft: '-100px',
+                    borderRadius: '50%',
+                  }}
+                />
+              </div>
+              <p style={{ marginTop: 30, padding: 50 }}>
+                <b>Mark Elliot Zuckerberg</b> (born May 14, 1984) is an
+                American media magnate, internet entrepreneur, and
+                philanthropist. He is known for co-founding Facebook, Inc. and
+                serves as its chairman, chief executive officer, and controlling
+                shareholder. He also is a co-founder of the solar sail
+                spacecraft development project Breakthrough Starshot and serves
+                as one of its board members.
+                <br /><br />
+                Born in White Plains, New York, Zuckerberg attended Harvard
+                University, where he launched the Facebook social networking
+                service from his dormitory room on February 4, 2004, with
+                college roommates Eduardo Saverin, Andrew McCollum, Dustin
+                Moskovitz, and Chris Hughes. Originally launched to select
+                college campuses, the site expanded rapidly and eventually
+                beyond colleges, reaching one billion users by 2012. Zuckerberg
+                took the company public in May 2012 with majority shares. In
+                2007, at age 23, he became the world's youngest self-made
+                billionaire. As of September 2020, Zuckerberg's net worth is
+                $111 billion, making him the 4th-richest person in the world. He
+                is the only person under 40-years-old in Forbes' list of the 20
+                richest people.
+              </p>
             </Modal>
           </div>
           <CommonHighlighter>
             {`<Modal
-  title="The Old Man and the Sea"
   visible={visible}
+  title="Mark Elliot Zuckerberg"
   onClose={() => setVisible(false)}
-  isCenteredMode
+  width={700}
+  isExpandedMode
 >
-  contents
+  <div
+    style={{
+      position: 'relative',
+      height: 180,
+      background: '#555',
+    }}
+  >
+    <img
+      src={markProfile}
+      alt="mark"
+      style={{
+        display: 'block',
+        position: 'absolute',
+        bottom: '-50px',
+        left: '50%',
+        width: 150,
+        marginLeft: '-100px',
+        borderRadius: '50%',
+      }}
+    />
+  </div>
+  <p style={{ marginTop: 30, padding: 50 }}>
+    <b>Mark Elliot Zuckerberg</b> (born May 14, 1984) is an
+    American media magnate, internet entrepreneur, and
+    philanthropist...
+  </p>
 </Modal>`}
+          </CommonHighlighter>
+        </div>
+
+        <h2>Hooks</h2>
+        <div className="example-area">
+          <h3>useModal</h3>
+          <div className="playground">
+            <button
+              type="button"
+              className="example-button"
+              onClick={openHookVisible}
+            >
+              open modal
+            </button>
+            <Modal
+              visible={hookVisible}
+              title="Friedrich Nietzsche"
+              onClose={closeHookVisible}
+            >
+              Do you want to have an easy life? Then always stay with the herd
+              and lose yourself in the herd.
+            </Modal>
+          </div>
+          <CommonHighlighter>
+            {`import React from 'react'
+import Modal, { useModal } from '@max/modal'
+
+export default function App() {
+  const [visible, openVisible, closeVisible] = useModal(false);
+
+  return (
+    <>
+      <button type="button" onClick={openVisible}>
+        open modal
+      </button>
+
+      <Modal
+        title="Title"
+        visible={visible}
+        onClose={closeVisible}
+      >
+        contents
+      </Modal>
+    </>
+  );
+}`}
           </CommonHighlighter>
         </div>
       </div>
