@@ -1,6 +1,6 @@
 # @max/modal
 
-> React modal dialogs.
+> ⚛️ React modal dialogs.
 
 [![NPM](https://img.shields.io/npm/v/@max/modal.svg)](https://www.npmjs.com/package/@max/modal) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -56,6 +56,7 @@ export default function App() {
 | title | `ReactNode` | | |
 | width | `number \| string` | `520` | |
 | zIndex | `number` | `1000` | |
+| mask | `boolean` | `true` | |
 
 ## Thanks :heart:
 Support it by joining __[stargazers](https://github.com/almond-bongbong/-max-modal/stargazers)__ for this repository. :star:
