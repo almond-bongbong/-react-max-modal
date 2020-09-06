@@ -1,6 +1,6 @@
 # @max/modal
 
-> ⚛️ React modal dialogs.
+> React modal dialogs. ⚛️
 
 [![NPM](https://img.shields.io/npm/v/@max/modal.svg)](https://www.npmjs.com/package/@max/modal) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
