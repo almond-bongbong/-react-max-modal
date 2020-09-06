@@ -327,7 +327,7 @@ export default function App() {
                 visible={examNestedChildModal}
                 title="Leo Tolstoy"
                 onClose={() => setExamNestedChildModal(false)}
-                width={600}
+                width={450}
                 isCenteredMode
                 isExpandedMode
               >

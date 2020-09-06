@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   CSSProperties,
-  ReactElement,
   ReactNode,
   SyntheticEvent,
   useCallback,
@@ -16,6 +15,7 @@ import Portal from './components/Portal';
 import Title from './components/Title';
 import CustomCloseButton from './components/CustomCloseButton';
 import CloseButton from './components/CloseButton';
+import ReactResizeDetector from 'react-resize-detector';
 
 interface Props {
   visible: boolean;
@@ -64,8 +64,9 @@ function Modal({
   maskClassName,
   bodyClassName,
   contentClassName,
-}: Props): ReactElement {
+}: Props): ReactNode {
   const modalIdRef = useRef<number>(Date.now());
+  const modalRef = useRef<HTMLDivElement>(null);
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const [localVisible, setLocalVisible] = useState(visible);
   const [hasScroll, setHasScroll] = useState(false);
@@ -82,36 +83,47 @@ function Modal({
     else removeGlobalModalId(modalIdRef.current);
   }, [visible]);
 
-  useLayoutEffect(() => {
-    if (visible && modalBodyRef.current) {
+  const checkHasScroll = useCallback(() => {
+    if (modalBodyRef.current) {
       const windowHeight = window.innerHeight;
       const height = modalBodyRef.current.clientHeight;
-      const margin = 50;
+      const margin = 100;
 
       if (windowHeight - margin < height) {
         setHasScroll(true);
       }
     }
-  }, [visible, modalBodyRef]);
+  }, [modalBodyRef]);
+
+  const handleResizeContent = useCallback(() => {
+    checkHasScroll();
+  }, []);
 
   useLayoutEffect(() => {
-    if (visible && !localVisible) {
+    const isFirstModal =
+      !window._activeModalIds || window._activeModalIds.length === 0;
+    if (visible && !localVisible && isFirstModal) {
       const scrollWidth =
         window.innerWidth - document.documentElement.clientWidth;
       document.body.style.position = 'relative';
       document.body.style.overflow = 'hidden';
       document.body.style.width = `calc(100% - ${scrollWidth || 0}px)`;
+
+      if (scrollWidth > 0) {
+        document.body.classList.add('hide-scrollbar');
+      }
     }
     if (!visible && !localVisible && window._activeModalIds?.length === 0) {
       document.body.style.position = '';
       document.body.style.overflow = '';
       document.body.style.width = '';
+      document.body.classList.remove('hide-scrollbar');
     }
   }, [visible, localVisible]);
 
   useEffect(() => {
     if (visible) {
-      setLocalVisible(visible);
+      setTimeout(() => setLocalVisible(visible), 16);
     } else {
       setTimeout(() => setLocalVisible(visible), 200);
     }
@@ -176,17 +188,18 @@ function Modal({
   );
 
   return (
-    <Portal>
-      {(visible || (!visible && localVisible)) && (
-        <>
-          {mask && (
-            <div className={maskClassNames} style={{ ...maskStyle, zIndex }} />
-          )}
-          <div
-            className={modalClassNames}
-            onClick={handleClickMask}
-            style={{ zIndex }}
-          >
+    (visible || (!visible && localVisible)) && (
+      <Portal>
+        {mask && (
+          <div className={maskClassNames} style={{ ...maskStyle, zIndex }} />
+        )}
+        <div
+          className={modalClassNames}
+          ref={modalRef}
+          onClick={handleClickMask}
+          style={{ zIndex }}
+        >
+          <ReactResizeDetector handleHeight onResize={handleResizeContent}>
             <div
               className={bodyClassNames}
               ref={modalBodyRef}
@@ -199,10 +212,10 @@ function Modal({
               </div>
               {showsCloseButton && closeButtonComponent}
             </div>
-          </div>
-        </>
-      )}
-    </Portal>
+          </ReactResizeDetector>
+        </div>
+      </Portal>
+    )
   );
 }
 
@@ -214,4 +227,4 @@ export const useModal = (initialVisible = false) => {
   const closeModal = useCallback((): void => setVisible(false), []);
 
   return [visible, openModal, closeModal] as const;
-}
+};

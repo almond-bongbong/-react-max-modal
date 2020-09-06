@@ -7,7 +7,7 @@ interface Props {
   children: ReactNode;
 }
 
-const PORTAL_ID = 'portal-container';
+const PORTAL_ID = 'modal-container';
 
 function Portal({ children }: Props): ReactPortal | null {
   const [init, setInit] = useState(false);
