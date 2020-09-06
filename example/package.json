@@ -1,7 +1,7 @@
 {
   "name": "@max/modal-example",
-  "homepage": "https://almond-bongbong.github.io/@max/modal",
-  "version": "0.0.1",
+  "homepage": "https://almond-bongbong.github.io/-max-modal",
+  "version": "0.0.2",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -9,7 +9,7 @@
     "prop-types": "^15.6.2",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
-    "react-scripts": "^1.1.4",
+    "react-scripts": "file:../node_modules/react-scripts",
     "react-syntax-highlighter": "^13.5.1"
   },
   "scripts": {
@@ -17,5 +17,17 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
