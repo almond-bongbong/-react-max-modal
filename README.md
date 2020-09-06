@@ -7,16 +7,17 @@
 ## Install
 
 ```bash
+# If you use npm:
 npm install --save @max/modal
-```
-or
-```bash
+
+# Or if you use Yarn:
 yarn add @max/modal
 ```
 
 > For support for react <16.8
 
-### [Live Demo](https://github.com/almond-bongbong)
+[Live Demo](https://github.com/almond-bongbong)
+
 
 ## Usage
 
@@ -45,7 +46,20 @@ export default function App() {
 }
 ```
 
+## Props
+
+| Name         | Type    | Default | Description |
+| ------------ | ------- | ------- | ----------- |
+| visible | `boolean` | `false` | |
+| children | `ReactNode` | | |
+| onClose | `() => void` |  |  |
+| title | `ReactNode` | | |
+| width | `number \| string` | `520` | |
+| zIndex | `number` | `1000` | |
+
+## Thanks :heart:
+Support it by joining __[stargazers](https://github.com/almond-bongbong/-max-modal/stargazers)__ for this repository. :star:
+
 
 ## License
-
 MIT © [almond-bongbong](https://github.com/almond-bongbong)
