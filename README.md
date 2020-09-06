@@ -5,7 +5,7 @@
 [![NPM](https://img.shields.io/npm/v/@max/modal.svg)](https://www.npmjs.com/package/@max/modal) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
-
+> For support for react <16.8
 ```bash
 # If you use npm:
 npm install --save @max/modal
@@ -13,10 +13,6 @@ npm install --save @max/modal
 # Or if you use Yarn:
 yarn add @max/modal
 ```
-
-> For support for react <16.8
-
-[Live Demo](https://github.com/almond-bongbong)
 
 
 ## Usage
@@ -46,6 +42,8 @@ export default function App() {
 }
 ```
 
+[Live Demo](https://github.com/almond-bongbong)
+
 ## Props
 
 | Name         | Type    | Default | Description |
@@ -58,7 +56,7 @@ export default function App() {
 | zIndex | `number` | `1000` | |
 | mask | `boolean` | `true` | |
 
-## Thanks :heart:
+## Thanks
 Support it by joining __[stargazers](https://github.com/almond-bongbong/-max-modal/stargazers)__ for this repository. :star:
 
 
