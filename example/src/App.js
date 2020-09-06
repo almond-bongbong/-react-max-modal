@@ -315,12 +315,12 @@ export default function App() {
               visible={examNestedModal}
               onClose={() => setExamNestedModal(false)}
             >
-              “A quiet secluded life in the country, with the possibility of
+              "A quiet secluded life in the country, with the possibility of
               being useful to people to whom it is easy to do good, and who are
               not accustomed to have it done to them; then work which one hopes
               may be of some use; then rest, nature, books, music, love for
               one's neighbor — such is my idea of happiness.” -{' '}
-              <a href="#;" onClick={() => setExamNestedChildModal(true)}>
+              <a href="#tolstoy" onClick={() => setExamNestedChildModal(true)}>
                 Leo Tolstoy
               </a>
               <Modal
@@ -362,8 +362,8 @@ export default function App() {
         visible={visibleParent}
         onClose={() => setVisibleParent(false)}
       >
-        “A quiet secluded life in the country, ...“
-        - <a href="#;" onClick={() => setVisibleChild(true)}>Leo Tolstoy</a>
+        "A quiet secluded life in the country, ..."
+        - <a href="#tolstoy" onClick={() => setVisibleChild(true)}>Leo Tolstoy</a>
 
         <Modal
           visible={visibleChild}
@@ -504,8 +504,8 @@ export default function App() {
               title="Friedrich Nietzsche"
               onClose={closeHookVisible}
             >
-              Do you want to have an easy life? Then always stay with the herd
-              and lose yourself in the herd.
+              "Do you want to have an easy life? Then always stay with the herd
+              and lose yourself in the herd."
             </Modal>
           </div>
           <CommonHighlighter>
@@ -513,18 +513,18 @@ export default function App() {
 import Modal, { useModal } from '@max/modal'
 
 export default function App() {
-  const [visible, openVisible, closeVisible] = useModal(false);
+  const [visible, openModal, closeModal] = useModal(false);
 
   return (
     <>
-      <button type="button" onClick={openVisible}>
+      <button type="button" onClick={openModal}>
         open modal
       </button>
 
       <Modal
         title="Title"
         visible={visible}
-        onClose={closeVisible}
+        onClose={closeModal}
       >
         contents
       </Modal>
