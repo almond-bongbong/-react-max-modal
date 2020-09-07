@@ -42,7 +42,7 @@ export default function App() {
 }
 ```
 
-[Live Demo](https://almond-bongbong.github.io/-max-modal/)
+[Live Demo](https://almond-bongbong.github.io/-react-max-modal/)
 
 ## Props
 
@@ -68,7 +68,7 @@ export default function App() {
 | contentClassName | `string` | | |
 
 ## Thanks
-Support it by joining __[stargazers](https://github.com/almond-bongbong/-max-modal/stargazers)__ for this repository. :star:
+Support it by joining __[stargazers](https://github.com/almond-bongbong/-react-max-modal/stargazers)__ for this repository. :star:
 
 
 ## License
