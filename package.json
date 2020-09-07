@@ -1,13 +1,11 @@
 {
   "name": "@react-max/modal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Basic react modal popup",
   "author": "almond-bongbong",
   "license": "MIT",
   "repository": "almond-bongbong/@react-max/modal",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
   },
