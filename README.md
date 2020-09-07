@@ -18,14 +18,14 @@ yarn add @react-max/modal
 ## Usage
 
 ```tsx
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import Modal from '@react-max/modal'
 
 export default function App() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <>
+    <Fragment>
       <button type="button" onClick={() => setVisible(true)}>
         open modal
       </button>
@@ -37,7 +37,7 @@ export default function App() {
       >
         contents
       </Modal>
-    </>
+    </Fragment>
   );
 }
 ```
