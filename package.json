@@ -1,6 +1,6 @@
 {
   "name": "@max/modal",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Basic react modal popup",
   "author": "almond-bongbong",
   "license": "MIT",
