@@ -42,7 +42,7 @@ export default function App() {
 }
 ```
 
-[Live Demo](https://github.com/almond-bongbong)
+[Live Demo](https://almond-bongbong.github.io/-max-modal/)
 
 ## Props
 
@@ -55,6 +55,17 @@ export default function App() {
 | width | `number \| string` | `520` | |
 | zIndex | `number` | `1000` | |
 | mask | `boolean` | `true` | |
+| maskStyle | `CSSProperties` | | |
+| closeButton | `ReactNode` | | |
+| showsCloseButton | `boolean` | `true` | |
+| isMaskClosable | `boolean` | `true` | |
+| isEscKeyClosable | `boolean` | `true` | |
+| isCenteredMode | `boolean` | `false` | |
+| isExpandedMode | `boolean` | `false` | |
+| modalClassName | `string` | | |
+| maskClassName | `string` | | |
+| bodyClassName | `string` | | |
+| contentClassName | `string` | | |
 
 ## Thanks
 Support it by joining __[stargazers](https://github.com/almond-bongbong/-max-modal/stargazers)__ for this repository. :star:
