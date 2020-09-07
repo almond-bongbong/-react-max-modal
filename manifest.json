@@ -1,6 +1,6 @@
 {
-  "short_name": "@max/modal",
-  "name": "@max/modal",
+  "short_name": "@react-max/modal",
+  "name": "@react-max/modal",
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",
