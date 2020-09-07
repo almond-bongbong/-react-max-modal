@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import CommonHighlighter from './CommonHighlighter';
-import Modal, { useModal } from '@max/modal';
+import Modal, { useModal } from '@react-max/modal';
 import customClose from './assets/close.svg';
 import markPhoto from './assets/mark.jpg';
 import tolstoyPhoto from './assets/tolstoy.jpg';
@@ -66,7 +66,7 @@ function App() {
 
           <CommonHighlighter>
             {`import React, { useState } from 'react'
-import Modal from '@max/modal'
+import Modal from '@react-max/modal'
 
 export default function App() {
   const [visible, setVisible] = useState(false);
@@ -341,7 +341,7 @@ export default function App() {
           </div>
           <CommonHighlighter>
             {`import React, { useState } from 'react'
-import Modal from '@max/modal'
+import Modal from '@react-max/modal'
 
 export default function App() {
   const [visibleParent, setVisibleParent] = useState(false);
@@ -510,7 +510,7 @@ export default function App() {
           </div>
           <CommonHighlighter>
             {`import React from 'react'
-import Modal, { useModal } from '@max/modal'
+import Modal, { useModal } from '@react-max/modal'
 
 export default function App() {
   const [visible, openModal, closeModal] = useModal(false);

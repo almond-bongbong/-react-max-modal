@@ -1,17 +1,17 @@
-# @max/modal
+# @react-max/modal
 
 > React modal dialogs. ⚛️
 
-[![NPM](https://img.shields.io/npm/v/@max/modal.svg)](https://www.npmjs.com/package/@max/modal) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@react-max/modal.svg)](https://www.npmjs.com/package/@react-max/modal) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Install
 > For support for react <16.8
 ```bash
 # If you use npm:
-npm install --save @max/modal
+npm install --save @react-max/modal
 
 # Or if you use Yarn:
-yarn add @max/modal
+yarn add @react-max/modal
 ```
 
 
@@ -19,7 +19,7 @@ yarn add @max/modal
 
 ```tsx
 import React, { useState } from 'react'
-import Modal from '@max/modal'
+import Modal from '@react-max/modal'
 
 export default function App() {
   const [visible, setVisible] = useState(false);

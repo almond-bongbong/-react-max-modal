@@ -1,10 +1,10 @@
 {
-  "name": "@max/modal",
+  "name": "@react-max/modal",
   "version": "0.0.1",
   "description": "Basic react modal popup",
   "author": "almond-bongbong",
   "license": "MIT",
-  "repository": "almond-bongbong/@max/modal",
+  "repository": "almond-bongbong/@react-max/modal",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",

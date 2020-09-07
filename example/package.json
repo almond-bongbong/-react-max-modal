@@ -1,11 +1,11 @@
 {
-  "name": "@max/modal-example",
+  "name": "@react-max/modal-example",
   "homepage": "https://almond-bongbong.github.io/-max-modal",
   "version": "0.0.2",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@max/modal": "file:..",
+    "@react-max/modal": "file:..",
     "prop-types": "^15.6.2",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
