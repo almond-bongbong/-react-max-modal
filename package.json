@@ -1,8 +1,12 @@
 {
   "name": "@react-max/modal",
-  "version": "0.0.4-3",
+  "version": "0.0.4-5",
   "description": "Basic react modal popup",
-  "repository": "almond-bongbong/@react-max/modal",
+  "homepage": "https://almond-bongbong.github.io/-react-max-modal/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/almond-bongbong/-react-max-modal.git"
+  },
   "author": "almond-bongbong",
   "license": "MIT",
   "main": "dist/index.js",
