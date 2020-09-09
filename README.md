@@ -50,7 +50,7 @@ export default function App() {
 | ------------ | ------- | ------- | ----------- |
 | visible | `boolean` | `false` | |
 | children | `ReactNode` | | |
-| onClose | `() => void` |  |  |
+| onClose | `() => void` | | |
 | title | `ReactNode` | | |
 | width | `number | string` | `520` | |
 | zIndex | `number` | `1000` | |

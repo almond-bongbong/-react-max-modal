@@ -124,7 +124,8 @@ function Modal({
   useEffect(() => {
     if (visible) {
       setTimeout(() => setLocalVisible(visible), 16);
-    } else {
+    }
+    if (!visible && localVisible) {
       setTimeout(() => setLocalVisible(visible), 200);
     }
   }, [visible]);
