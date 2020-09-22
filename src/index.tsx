@@ -26,7 +26,6 @@ interface Props {
   width?: number | string;
   zIndex?: number;
   mask?: boolean;
-  maskStyle?: CSSProperties;
   closeButton?: ReactNode;
   showsCloseButton?: boolean;
   isMaskClosable?: boolean;
@@ -37,6 +36,10 @@ interface Props {
   maskClassName?: string;
   bodyClassName?: string;
   contentClassName?: string;
+  modalStyle?: CSSProperties;
+  maskStyle?: CSSProperties;
+  bodyStyle?: CSSProperties;
+  contentStyle?: CSSProperties;
 }
 
 const addGlobalModalId = (id: number) =>

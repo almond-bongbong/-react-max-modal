@@ -55,7 +55,6 @@ export default function App() {
 | width | `number | string` | `520` | |
 | zIndex | `number` | `1000` | |
 | mask | `boolean` | `true` | |
-| maskStyle | `CSSProperties` | | |
 | closeButton | `ReactNode` | | |
 | showsCloseButton | `boolean` | `true` | |
 | isMaskClosable | `boolean` | `true` | |
@@ -66,6 +65,10 @@ export default function App() {
 | maskClassName | `string` | | |
 | bodyClassName | `string` | | |
 | contentClassName | `string` | | |
+| modalStyle | `CSSProperties` | | |
+| maskStyle | `CSSProperties` | | |
+| bodyStyle | `CSSProperties` | | |
+| contentStyle | `CSSProperties` | | |
 
 ## Thanks
 Support it by joining __[stargazers](https://github.com/almond-bongbong/-react-max-modal/stargazers)__ for this repository. :star:
