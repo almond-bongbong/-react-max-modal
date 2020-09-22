@@ -7,7 +7,7 @@ import {
   useEffect,
   useLayoutEffect,
   useRef,
-  useState,
+  useState
 } from 'react';
 import { mergeClassNames } from './libs/utils';
 import styles from './styles.css';
@@ -64,7 +64,7 @@ function Modal({
   maskClassName,
   bodyClassName,
   contentClassName,
-}: Props): ReactNode {
+}: Props) {
   const modalIdRef = useRef<number>(Date.now());
   const modalRef = useRef<HTMLDivElement>(null);
   const modalBodyRef = useRef<HTMLDivElement>(null);
