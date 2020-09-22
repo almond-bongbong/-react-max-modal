@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {
-  CSSProperties, ReactElement,
+  CSSProperties,
+  ReactElement,
   ReactNode,
   SyntheticEvent,
   useCallback,
   useEffect,
   useLayoutEffect,
   useRef,
-  useState
+  useState,
 } from 'react';
 import { mergeClassNames } from './libs/utils';
 import styles from './styles.css';
@@ -57,7 +58,6 @@ function Modal({
   width = 520,
   zIndex,
   mask = true,
-  maskStyle,
   closeButton,
   showsCloseButton = true,
   isMaskClosable = true,
@@ -68,6 +68,10 @@ function Modal({
   maskClassName,
   bodyClassName,
   contentClassName,
+  modalStyle,
+  maskStyle,
+  bodyStyle,
+  contentStyle,
 }: Props): ReactElement | null {
   const modalIdRef = useRef<number>(Date.now());
   const modalRef = useRef<HTMLDivElement>(null);
@@ -194,36 +198,34 @@ function Modal({
     <CloseButton onClick={onClose} />
   );
 
-  return (
-    (visible || (!visible && localVisible)) ? (
-      <Portal>
-        {mask && (
-          <div className={maskClassNames} style={{ ...maskStyle, zIndex }} />
-        )}
-        <div
-          className={modalClassNames}
-          ref={modalRef}
-          onClick={handleClickMask}
-          style={{ zIndex }}
-        >
-          <ReactResizeDetector handleHeight onResize={handleResizeContent}>
-            <div
-              className={bodyClassNames}
-              ref={modalBodyRef}
-              onClick={handleClickBody}
-              style={{ width }}
-            >
-              <div className={contentClassNames}>
-                {title && <Title>{title}</Title>}
-                {children}
-              </div>
-              {showsCloseButton && closeButtonComponent}
+  return visible || (!visible && localVisible) ? (
+    <Portal>
+      {mask && (
+        <div className={maskClassNames} style={{ ...maskStyle, zIndex }} />
+      )}
+      <div
+        className={modalClassNames}
+        ref={modalRef}
+        onClick={handleClickMask}
+        style={{ ...modalStyle, zIndex }}
+      >
+        <ReactResizeDetector handleHeight onResize={handleResizeContent}>
+          <div
+            className={bodyClassNames}
+            ref={modalBodyRef}
+            onClick={handleClickBody}
+            style={{ ...bodyStyle, width }}
+          >
+            <div className={contentClassNames} style={contentStyle}>
+              {title && <Title>{title}</Title>}
+              {children}
             </div>
-          </ReactResizeDetector>
-        </div>
-      </Portal>
-    ) : null
-  );
+            {showsCloseButton && closeButtonComponent}
+          </div>
+        </ReactResizeDetector>
+      </div>
+    </Portal>
+  ) : null;
 }
 
 export default Modal;
