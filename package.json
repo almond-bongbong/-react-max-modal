@@ -1,6 +1,6 @@
 {
   "name": "@react-max/modal",
-  "version": "0.0.8-1",
+  "version": "0.0.9",
   "description": "Basic react modal popup",
   "homepage": "https://almond-bongbong.github.io/-react-max-modal/",
   "repository": {
@@ -10,6 +10,8 @@
   "author": "almond-bongbong",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
