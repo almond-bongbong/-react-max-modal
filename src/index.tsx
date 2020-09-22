@@ -16,6 +16,7 @@ import Title from './components/Title';
 import CustomCloseButton from './components/CustomCloseButton';
 import CloseButton from './components/CloseButton';
 import ReactResizeDetector from 'react-resize-detector';
+import { isBrowser } from './libs/validation';
 
 interface Props {
   visible: boolean;
@@ -100,6 +101,8 @@ function Modal({
   }, []);
 
   useLayoutEffect(() => {
+    if (!isBrowser()) return;
+
     const isFirstModal =
       !window._activeModalIds || window._activeModalIds.length === 0;
     if (visible && !localVisible && isFirstModal) {
