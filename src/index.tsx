@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  CSSProperties,
+  CSSProperties, ReactElement,
   ReactNode,
   SyntheticEvent,
   useCallback,
@@ -64,7 +64,7 @@ function Modal({
   maskClassName,
   bodyClassName,
   contentClassName,
-}: Props) {
+}: Props): ReactElement | null {
   const modalIdRef = useRef<number>(Date.now());
   const modalRef = useRef<HTMLDivElement>(null);
   const modalBodyRef = useRef<HTMLDivElement>(null);
@@ -189,7 +189,7 @@ function Modal({
   );
 
   return (
-    (visible || (!visible && localVisible)) && (
+    (visible || (!visible && localVisible)) ? (
       <Portal>
         {mask && (
           <div className={maskClassNames} style={{ ...maskStyle, zIndex }} />
@@ -216,7 +216,7 @@ function Modal({
           </ReactResizeDetector>
         </div>
       </Portal>
-    )
+    ) : null
   );
 }
 
