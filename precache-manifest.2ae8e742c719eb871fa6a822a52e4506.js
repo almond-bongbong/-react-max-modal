@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "896ed1e00a674adf9addbcf857dc3d9e",
+    "revision": "b7c0ab1b60a76016c088f5a3f02340f3",
     "url": "/-react-max-modal/index.html"
   },
   {
-    "revision": "c14df603661eb22338f9",
+    "revision": "864feff5c29085945756",
     "url": "/-react-max-modal/static/css/main.de824f0f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/-react-max-modal/static/js/2.1c508eb5.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c14df603661eb22338f9",
-    "url": "/-react-max-modal/static/js/main.e22d8046.chunk.js"
+    "revision": "864feff5c29085945756",
+    "url": "/-react-max-modal/static/js/main.c6f6ecb3.chunk.js"
   },
   {
     "revision": "80670c8b4be953e654eb",
