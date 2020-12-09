@@ -32,16 +32,13 @@
 .modal_body {
   overflow: hidden;
   opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 50%;
+  position: relative;
   width: auto;
   max-width: calc(100% - 40px);
   margin: 100px auto;
   border-radius: 2px;
   background-color: #fff;
   box-shadow: 0 2px 6px 1px rgba(0, 0, 0, 0.23);
-  transform: translate(-50%, 0);
   transition: opacity 0.2s ease-out;
 }
 
@@ -49,13 +46,13 @@
 .overflow_body.center_mode .modal_body {
   top: 0;
   margin: 50px auto;
-  transform: translate(-50%, 0);
 }
 
 .center_mode .modal_body {
-  top: 50%;
   margin: auto;
-  transform: translate(-50%, -50%);
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .active .modal_body {
