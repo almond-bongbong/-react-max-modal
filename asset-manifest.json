@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/-react-max-modal/static/css/main.de824f0f.chunk.css",
-    "main.js": "/-react-max-modal/static/js/main.c6f6ecb3.chunk.js",
-    "main.js.map": "/-react-max-modal/static/js/main.c6f6ecb3.chunk.js.map",
+    "main.js": "/-react-max-modal/static/js/main.5387a6b7.chunk.js",
+    "main.js.map": "/-react-max-modal/static/js/main.5387a6b7.chunk.js.map",
     "runtime-main.js": "/-react-max-modal/static/js/runtime-main.1e378130.js",
     "runtime-main.js.map": "/-react-max-modal/static/js/runtime-main.1e378130.js.map",
     "static/js/2.1c508eb5.chunk.js": "/-react-max-modal/static/js/2.1c508eb5.chunk.js",
     "static/js/2.1c508eb5.chunk.js.map": "/-react-max-modal/static/js/2.1c508eb5.chunk.js.map",
     "index.html": "/-react-max-modal/index.html",
-    "precache-manifest.2ae8e742c719eb871fa6a822a52e4506.js": "/-react-max-modal/precache-manifest.2ae8e742c719eb871fa6a822a52e4506.js",
+    "precache-manifest.84bf3a93f119d3f2ae50d4c5c8752346.js": "/-react-max-modal/precache-manifest.84bf3a93f119d3f2ae50d4c5c8752346.js",
     "service-worker.js": "/-react-max-modal/service-worker.js",
     "static/css/main.de824f0f.chunk.css.map": "/-react-max-modal/static/css/main.de824f0f.chunk.css.map",
     "static/js/2.1c508eb5.chunk.js.LICENSE.txt": "/-react-max-modal/static/js/2.1c508eb5.chunk.js.LICENSE.txt",
@@ -20,6 +20,6 @@
     "static/js/runtime-main.1e378130.js",
     "static/js/2.1c508eb5.chunk.js",
     "static/css/main.de824f0f.chunk.css",
-    "static/js/main.c6f6ecb3.chunk.js"
+    "static/js/main.5387a6b7.chunk.js"
   ]
 }
