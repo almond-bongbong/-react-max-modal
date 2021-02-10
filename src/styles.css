@@ -46,6 +46,7 @@
 .overflow_body.center_mode .modal_body {
   top: 0;
   margin: 50px auto;
+  transform: none;
 }
 
 .center_mode .modal_body {
