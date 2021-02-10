@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cf7a1f09d0173eb36f3e051ea7343ba2",
+    "revision": "bfb2d145f7468241f56aea041f7e339c",
     "url": "/-react-max-modal/index.html"
   },
   {
-    "revision": "0e87d90021aad058352e",
+    "revision": "f2eaf216242bf0a329ed",
     "url": "/-react-max-modal/static/css/main.de824f0f.chunk.css"
   },
   {
-    "revision": "6582b1ee81a72603b8f4",
-    "url": "/-react-max-modal/static/js/2.1c508eb5.chunk.js"
+    "revision": "c213391b4f9aa04f5525",
+    "url": "/-react-max-modal/static/js/2.36aef3ea.chunk.js"
   },
   {
     "revision": "05ea761b7a5361472988577479d7ab28",
-    "url": "/-react-max-modal/static/js/2.1c508eb5.chunk.js.LICENSE.txt"
+    "url": "/-react-max-modal/static/js/2.36aef3ea.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0e87d90021aad058352e",
-    "url": "/-react-max-modal/static/js/main.5387a6b7.chunk.js"
+    "revision": "f2eaf216242bf0a329ed",
+    "url": "/-react-max-modal/static/js/main.d4a6785f.chunk.js"
   },
   {
     "revision": "80670c8b4be953e654eb",
