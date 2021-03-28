@@ -52,7 +52,7 @@ export default function App() {
 | children | `ReactNode` | | |
 | onClose | `() => void` | | |
 | title | `ReactNode` | | |
-| width | `number | string` | `520` | |
+| width | `number` | `string` | `520` | |
 | zIndex | `number` | `1000` | |
 | mask | `boolean` | `true` | |
 | closeButton | `ReactNode` | | |
