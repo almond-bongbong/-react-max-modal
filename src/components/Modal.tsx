@@ -11,6 +11,7 @@ import ReactResizeDetector from 'react-resize-detector';
 import Title from './Title';
 import Portal from './Portal';
 import { isBrowser } from '../libs/validation';
+import { lockBodyScroll, unlockBodyScroll } from '../libs/utils';
 
 interface Props {
   mask?: boolean;
@@ -55,23 +56,12 @@ function Modal({
     const isFirstModal =
       !window._activeModalIds || window._activeModalIds.length === 0;
     if (isFirstModal) {
-      const scrollWidth =
-        window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.position = 'relative';
-      document.body.style.overflow = 'hidden';
-      document.body.style.width = `calc(100% - ${scrollWidth || 0}px)`;
-
-      if (scrollWidth > 0) {
-        document.body.classList.add('hide-scrollbar');
-      }
+      lockBodyScroll();
     }
 
     return () => {
       if (window._activeModalIds?.length === 0) {
-        document.body.style.position = '';
-        document.body.style.overflow = '';
-        document.body.style.width = '';
-        document.body.classList.remove('hide-scrollbar');
+        unlockBodyScroll();
       }
     };
   }, []);
