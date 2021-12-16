@@ -12,8 +12,10 @@ import Title from './Title';
 import Portal from './Portal';
 import { isBrowser } from '../libs/validation';
 import { lockBodyScroll, unlockBodyScroll } from '../libs/utils';
+import { getActiveModalLength } from '../libs/element';
 
 interface Props {
+  id: number;
   mask?: boolean;
   maskClassName: string;
   maskStyle: CSSProperties;
@@ -33,6 +35,7 @@ interface Props {
 }
 
 function Modal({
+  id,
   mask,
   maskClassName,
   maskStyle,
@@ -53,16 +56,17 @@ function Modal({
   useLayoutEffect(() => {
     if (!isBrowser()) return;
 
-    const isFirstModal =
-      !window._activeModalIds || window._activeModalIds.length === 0;
+    const isFirstModal = getActiveModalLength() === 0;
     if (isFirstModal) {
       lockBodyScroll();
     }
 
     return () => {
-      if (window._activeModalIds?.length === 0) {
-        unlockBodyScroll();
-      }
+      setTimeout(() => {
+        if (getActiveModalLength() === 0) {
+          unlockBodyScroll();
+        }
+      }, 16);
     };
   }, []);
 
@@ -74,7 +78,7 @@ function Modal({
   );
 
   return (
-    <Portal>
+    <Portal id={id}>
       {mask && <div className={maskClassName} style={maskStyle} />}
       <div className={modalClassName} onClick={onClickMask} style={modalStyle}>
         <ReactResizeDetector handleHeight onResize={onResizeContent}>

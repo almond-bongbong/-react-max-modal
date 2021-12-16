@@ -1,10 +1,19 @@
 import * as React from 'react';
-import { CSSProperties, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  ReactElement,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { mergeClassNames } from './libs/utils';
 import styles from './styles.css';
 import CustomCloseButton from './components/CustomCloseButton';
 import CloseButton from './components/CloseButton';
 import Modal from './components/Modal';
+import { getLastModalId } from './libs/element';
 
 interface Props {
   visible: boolean;
@@ -29,13 +38,6 @@ interface Props {
   bodyStyle?: CSSProperties;
   contentStyle?: CSSProperties;
 }
-
-const addGlobalModalId = (id: number) =>
-  (window._activeModalIds = (window._activeModalIds || []).concat(id));
-const removeGlobalModalId = (removeId: number) =>
-  (window._activeModalIds = window._activeModalIds?.filter(
-    (id) => id !== removeId,
-  ));
 
 function ModalContainer({
   visible,
@@ -65,18 +67,6 @@ function ModalContainer({
   const [localVisible, setLocalVisible] = useState(visible);
   const [hasScroll, setHasScroll] = useState(false);
 
-  useEffect(
-    () => () => {
-      removeGlobalModalId(modalIdRef.current);
-    },
-    [],
-  );
-
-  useEffect(() => {
-    if (visible) addGlobalModalId(modalIdRef.current);
-    else removeGlobalModalId(modalIdRef.current);
-  }, [visible]);
-
   const checkHasScroll = useCallback(() => {
     if (modalBodyRef.current) {
       const windowHeight = window.innerHeight;
@@ -104,12 +94,7 @@ function ModalContainer({
 
   const keydownHandler = useCallback(
     (e) => {
-      if (
-        window._activeModalIds &&
-        window._activeModalIds[window._activeModalIds.length - 1] ===
-          modalIdRef.current &&
-        e.code === 'Escape'
-      ) {
+      if (getLastModalId() === modalIdRef.current && e.code === 'Escape') {
         onClose?.();
       }
     },
@@ -154,27 +139,26 @@ function ModalContainer({
   );
 
   return visible || (!visible && localVisible) ? (
-    <>
-      <Modal
-        mask={mask}
-        maskClassName={maskClassNames}
-        maskStyle={{ ...maskStyle, zIndex }}
-        modalClassName={modalClassNames}
-        modalStyle={{ ...modalStyle, zIndex }}
-        bodyClassName={bodyClassNames}
-        bodyStyle={{ ...bodyStyle, width }}
-        bodyRef={modalBodyRef}
-        contentClassName={contentClassNames}
-        contentStyle={contentStyle}
-        title={title}
-        showsCloseButton={showsCloseButton}
-        closeButton={closeButtonComponent}
-        onClickMask={handleClickMask}
-        onResizeContent={handleResizeContent}
-      >
-        {children}
-      </Modal>
-    </>
+    <Modal
+      id={modalIdRef.current}
+      mask={mask}
+      maskClassName={maskClassNames}
+      maskStyle={{ ...maskStyle, zIndex }}
+      modalClassName={modalClassNames}
+      modalStyle={{ ...modalStyle, zIndex }}
+      bodyClassName={bodyClassNames}
+      bodyStyle={{ ...bodyStyle, width }}
+      bodyRef={modalBodyRef}
+      contentClassName={contentClassNames}
+      contentStyle={contentStyle}
+      title={title}
+      showsCloseButton={showsCloseButton}
+      closeButton={closeButtonComponent}
+      onClickMask={handleClickMask}
+      onResizeContent={handleResizeContent}
+    >
+      {children}
+    </Modal>
   ) : null;
 }
 

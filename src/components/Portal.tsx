@@ -4,12 +4,13 @@ import { addRootElement } from '../libs/element';
 import { isBrowser } from '../libs/validation';
 
 interface Props {
+  id: number;
   children: ReactNode;
 }
 
-const PORTAL_ID = 'modal-container';
+export const PORTAL_ID = 'modal-container';
 
-function Portal({ children }: Props): ReactPortal | null {
+function Portal({ id, children }: Props): ReactPortal | null {
   const [init, setInit] = useState(false);
   const el = useRef(isBrowser() ? document.createElement('div') : null);
   const portalContainer = isBrowser() && document.getElementById(PORTAL_ID);
@@ -32,6 +33,10 @@ function Portal({ children }: Props): ReactPortal | null {
       }
     };
   }, [portalContainer]);
+
+  if (el.current) {
+    el.current.id = id.toString();
+  }
 
   return el.current && init ? createPortal(children, el.current) : null;
 }
