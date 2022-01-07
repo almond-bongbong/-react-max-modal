@@ -5,9 +5,9 @@ import {
   RefObject,
   SyntheticEvent,
   useCallback,
-  useLayoutEffect,
 } from 'react';
 import ReactResizeDetector from 'react-resize-detector';
+import useIsomorphicLayoutEffect from '../hooks/useIsomorphicLayoutEffect';
 import Title from './Title';
 import Portal from './Portal';
 import { isBrowser } from '../libs/validation';
@@ -53,7 +53,7 @@ function Modal({
   onClickMask,
   onResizeContent,
 }: Props) {
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!isBrowser()) return;
 
     const isFirstModal = getActiveModalLength() === 0;
